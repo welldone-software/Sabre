@@ -2,12 +2,14 @@
   "name": "Sabre",
   "version": "0.0.1",
   "private": true,
+  "main": "dist",
   "scripts": {
     "lint": "eslint \"**/*.js\"",
-    "test": "npm run lint && mocha --compilers: js:babel-register \"test/**/*.spec.js\"",
-    "start": "watchman watch-del-all && node node_modules/react-native/local-cli/cli.js start -- --reset-cache"
+    "test": "npm run lint && mocha --compilers: js:babel-register \"test/**/*.spec.js\""
   },
   "dependencies": {
+    "debug": "^2.2.0",
+    "soap": "^0.16.0"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
