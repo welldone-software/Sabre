@@ -12,7 +12,11 @@ describe('Saber', function () {
   this.slow(10000)
   this.timeout(10000)
 
+
+
   it('Should create a soap client', function () {
-    return SabreSoupClient.create()
+    return SabreSoupClient.create().then(saber => {
+
+    })
   })
 })
