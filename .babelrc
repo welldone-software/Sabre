@@ -1,11 +1,27 @@
 {
-  "presets": ["es2015"],
+  "presets": [
+    "es2015"
+  ],
   "plugins": [
     [
-      "module-alias", [
-      {"src": "./src/", "expose": "sabre"},
-      {"src": "./src/lib", "expose": "lib"},
-      {"src": "./test", "expose": "test"} ]
+      "transform-object-rest-spread"
+    ],
+    [
+      "module-alias",
+      [
+        {
+          "src": "./src/",
+          "expose": "sabre"
+        },
+        {
+          "src": "./src/lib",
+          "expose": "lib"
+        },
+        {
+          "src": "./test",
+          "expose": "test"
+        }
+      ]
     ]
   ]
 }

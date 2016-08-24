@@ -1,7 +1,35 @@
+import R from 'ramda'
 import fs from 'fs'
 import request from 'request'
 import compile from 'string-template/compile'
 import { parseString } from './xml'
+
+const errorSelector = R.pipe(
+  R.prop('soap-env:Envelope'),
+  R.prop('soap-env:Body'),
+  R.head,
+  R.prop('soap-env:Fault'),
+  R.head)
+
+const errorCodeSelector = R.pipe(
+  R.prop('faultcode'),
+  R.head)
+
+const errorStringSelector = R.pipe(
+  R.prop('faultstring'),
+  R.head)
+
+const errorMessageSelector = R.pipe(
+  R.prop('detail'),
+  R.head,
+  R.prop('stl:ApplicationResults'),
+  R.head,
+  R.prop('stl:Error'),
+  R.head,
+  R.prop('stl:SystemSpecificResults'),
+  R.head,
+  R.prop('stl:Message'),
+  R.head)
 
 const readFile = (path) => {
   return new Promise((resolve, reject) => {
@@ -41,21 +69,25 @@ const postRequest = (requestBody) => {
 export const createRequest = (path) => {
   return readFile(path).then(template => {
     const compiledTemplate = compile(template)
-    const request = (args) => {
+    const soapRequest = (args) => {
       const requestBody = compiledTemplate(args)
-      return postRequest(requestBody).then(response => {
-        if (response.statusCode !== 200) {
-          const error = new Error()
-          error.response = response
-          error.code = response.statusCode
-          error.message = response.statusMessage
-          throw error
-        }
+      return postRequest(requestBody)
+        .then(response => parseString(response.body)
+          .then(body => ({ ...response, body })))
+        .then(response => {
+          if (response.statusCode !== 200) {
+            const soapError = errorSelector(response.body)
+            const error = new Error()
+            error.body = response.body
+            error.code = errorCodeSelector(soapError)
+            error.message = errorMessageSelector(soapError)
+            throw error
+          }
 
-        return parseString(response.body)
-      })
+          return response.body
+        })
     }
 
-    return request
+    return soapRequest
   })
 }
