@@ -3,6 +3,9 @@ import fs from 'fs'
 import request from 'request'
 import compile from 'string-template/compile'
 import { parseString } from './xml'
+import { createLogger } from './logger'
+
+const logger = createLogger('sabre:client')
 
 const errorSelector = R.pipe(
   R.prop('soap-env:Envelope'),
@@ -15,16 +18,8 @@ const errorCodeSelector = R.pipe(
   R.prop('faultcode'),
   R.head)
 
-const errorMessageSelector = R.pipe(
-  R.prop('detail'),
-  R.head,
-  R.prop('stl:ApplicationResults'),
-  R.head,
-  R.prop('stl:Error'),
-  R.head,
-  R.prop('stl:SystemSpecificResults'),
-  R.head,
-  R.prop('stl:Message'),
+const errorStringSelector = R.pipe(
+  R.prop('faultstring'),
   R.head)
 
 const readFile = (path) => {
@@ -40,14 +35,14 @@ const readFile = (path) => {
   })
 }
 
-const postRequest = (requestBody) => {
+const postRequest = (requestXml) => {
   const options = {
     method: 'POST',
     uri: 'https://sws-crt.cert.sabre.com/',
     headers: {
       'Content-Type': 'text/xml;charset=UTF-8',
     },
-    body: requestBody,
+    body: requestXml,
   }
 
   return new Promise((resolve, reject) => {
@@ -66,9 +61,11 @@ export const createRequest = (path) => {
   return readFile(path).then(template => {
     const compiledTemplate = compile(template)
     const soapRequest = (args) => {
-      const requestBody = compiledTemplate(args)
-      return postRequest(requestBody)
+      const requestXml = compiledTemplate(args)
+      logger.info(`Sending outgoing request:\n${requestXml}`)
+      return postRequest(requestXml)
         .then(response => {
+          logger.info(`Receiving incoming request:\n${response.body}`)
           return parseString(response.body).then(body => ({ ...response, body }))
         })
         .then(response => {
@@ -77,7 +74,7 @@ export const createRequest = (path) => {
             const error = new Error()
             error.body = response.body
             error.code = errorCodeSelector(soapError)
-            error.message = errorMessageSelector(soapError)
+            error.message = errorStringSelector(soapError)
             throw error
           }
 

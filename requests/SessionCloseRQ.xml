@@ -1,4 +1,7 @@
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/1999/XMLSchema">
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+                   xmlns:xlink="http://www.w3.org/1999/xlink"
+                   xmlns:xsd="http://www.w3.org/1999/XMLSchema">
   <SOAP-ENV:Header>
     <eb:MessageHeader SOAP-ENV:mustUnderstand="1" eb:version="2.0">
       <eb:From>
@@ -16,14 +19,17 @@
         <eb:Timestamp>{timestamp}</eb:Timestamp>
       </eb:MessageData>
     </eb:MessageHeader>
-    <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
-      <wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">{securityToken}</wsse:BinarySecurityToken>
+    <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"
+                   xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
+      <wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">
+        {securityToken}
+      </wsse:BinarySecurityToken>
     </wsse:Security>
   </SOAP-ENV:Header>
   <SOAP-ENV:Body>
     <SessionCloseRQ>
       <POS>
-        <Source PseudoCityCode="{organization}"/>
+        <Source PseudoCityCode="{organization}" />
       </POS>
     </SessionCloseRQ>
   </SOAP-ENV:Body>
