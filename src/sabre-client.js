@@ -4,15 +4,30 @@ import { createRequest } from './soap-client'
 
 const logger = createLogger('sabre:client')
 
+const securityTokenSelector = R.pipe(
+  R.prop('soap-env:Envelope'),
+  R.prop('soap-env:Header'),
+  R.head,
+  R.prop('wsse:Security'),
+  R.head,
+  R.prop('wsse:BinarySecurityToken'))
+
 class SabreClient {
   constructor(requests, args) {
     this.requests = requests
     this.args = args
+    this.securityToken = null
   }
 
   sessionCreateRQ() {
     return this.requests.sessionCreateRQ(this.args).then(response => {
-      logger.info(JSON.stringify(response, null, ' '))
+      this.securityToken = securityTokenSelector(response)
+      return response
+    })
+  }
+
+  sessionCloseRQ() {
+    return this.requests.sessionCloseRQ(this.args).then(response => {
       return response
     })
   }

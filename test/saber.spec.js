@@ -1,10 +1,14 @@
 /* eslint-env mocha */
 /* eslint-disable max-len */
 /* eslint-disable func-names */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-arrow-callback */
 import sinon from 'sinon'
 import { expect } from 'chai'
+import { createLogger } from 'sabre/logger'
 import { createSabreClient } from 'sabre'
+
+const logger = createLogger('sabre:client')
 
 const saberClientArgs = {
   conversationId: 'session100@sabre.com',
@@ -27,7 +31,7 @@ describe('Saber', function () {
 
   it('Should call SessionCreateRQ', function () {
     return this.soapClient.sessionCreateRQ().then(response => {
-
+      expect(this.soapClient.securityToken).to.exist
     })
   })
 })
