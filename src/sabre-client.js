@@ -35,16 +35,23 @@ class SabreClient {
       return response
     })
   }
+
+  otaAirAvailLLSRQ() {
+    return this.requests.otaAirAvailLLSRQ(this.args).then(response => {
+      return response
+    })
+  }
 }
 
 export const createSabreClient = (args) => {
   const requests = {
     sessionCreateRQ: createRequest('./requests/SessionCreateRQ.xml'),
     sessionCloseRQ: createRequest('./requests/SessionCloseRQ.xml'),
+    otaAirAvailLLSRQ: createRequest('./requests/OTA_AirAvailLLSRQ.xml'),
   }
 
   return Promise.all(R.values(requests)).then(resolved => {
     const resolvedRequests = R.zipObj(R.keys(requests), resolved)
-    return new SabreClient(resolvedRequests, args)
+    return new SabreClient(resolvedRequests, R.clone(args))
   })
 }

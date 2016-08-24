@@ -36,6 +36,12 @@ describe('Saber', function () {
     })
   })
 
+  it('Should send OTA_AirAvailLLSRQ', function () {
+    return this.soapClient.otaAirAvailLLSRQ().then((response) => {
+
+    })
+  })
+
   it('Should close a session', function () {
     return this.soapClient.sessionCloseRQ().then(() => {
       expect(this.soapClient.args.securityToken).to.not.exist
