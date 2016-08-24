@@ -1,7 +1,7 @@
 import fs from 'fs'
 import request from 'request'
 import compile from 'string-template/compile'
-import { parseString }  from './xml'
+import { parseString } from './xml'
 
 const readFile = (path) => {
   return new Promise((resolve, reject) => {

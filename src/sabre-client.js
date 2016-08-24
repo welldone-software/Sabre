@@ -1,10 +1,7 @@
-import debug from 'debug'
+import { createLogger } from './logger'
 import { createRequest } from './soap-client'
 
-const logger = {}
-logger.info = debug('sabre:client:error')
-logger.info.log = console.log.bind(console)
-logger.error = debug('sabre:client:error')
+const logger = createLogger('sabre:client')
 
 class SabreClient {
   constructor(requests, args) {
