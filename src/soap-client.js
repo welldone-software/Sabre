@@ -44,6 +44,14 @@ export const createRequest = (path) => {
     const request = (args) => {
       const requestBody = compiledTemplate(args)
       return postRequest(requestBody).then(response => {
+        if (response.statusCode !== 200) {
+          const error = new Error()
+          error.response = response
+          error.code = response.statusCode
+          error.message = response.statusMessage
+          throw error
+        }
+
         return parseString(response.body)
       })
     }
