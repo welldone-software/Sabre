@@ -15,10 +15,6 @@ const errorCodeSelector = R.pipe(
   R.prop('faultcode'),
   R.head)
 
-const errorStringSelector = R.pipe(
-  R.prop('faultstring'),
-  R.head)
-
 const errorMessageSelector = R.pipe(
   R.prop('detail'),
   R.head,
@@ -72,8 +68,9 @@ export const createRequest = (path) => {
     const soapRequest = (args) => {
       const requestBody = compiledTemplate(args)
       return postRequest(requestBody)
-        .then(response => parseString(response.body)
-          .then(body => ({ ...response, body })))
+        .then(response => {
+          return parseString(response.body).then(body => ({ ...response, body }))
+        })
         .then(response => {
           if (response.statusCode !== 200) {
             const soapError = errorSelector(response.body)

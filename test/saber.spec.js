@@ -23,28 +23,28 @@ describe('Saber', function () {
   this.timeout(10000)
 
   before(function () {
-    return createSabreClient(saberClientArgs)
-      .then(soapClient => {
-        this.soapClient = soapClient
-      })
+    return createSabreClient(saberClientArgs).then(soapClient => {
+      this.soapClient = soapClient
+    })
   })
 
   it('Should create a session', function () {
     return this.soapClient.sessionCreateRQ().then(() => {
-      expect(this.soapClient.args.securityToken).to.exist
-      expect(this.soapClient.args.securityToken).to.be.a('string')
+      expect(this.soapClient.messageId).to.equal(1001)
+      expect(this.soapClient.securityToken).to.exist
+      expect(this.soapClient.securityToken).to.be.a('string')
     })
   })
 
   it('Should send OTA_AirAvailLLSRQ', function () {
-    return this.soapClient.otaAirAvailLLSRQ().then((response) => {
+    return this.soapClient.otaAirAvailLLSRQ().then(() => {
 
     })
   })
 
   it('Should close a session', function () {
     return this.soapClient.sessionCloseRQ().then(() => {
-      expect(this.soapClient.args.securityToken).to.not.exist
+      expect(this.soapClient.securityToken).to.not.exist
     })
   })
 })

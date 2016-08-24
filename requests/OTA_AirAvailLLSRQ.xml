@@ -1,35 +1,42 @@
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/1999/XMLSchema">
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+                   xmlns:xlink="http://www.w3.org/1999/xlink"
+                   xmlns:xsd="http://www.w3.org/1999/XMLSchema">
   <SOAP-ENV:Header>
     <eb:MessageHeader SOAP-ENV:mustUnderstand="1" eb:version="1.0">
       <eb:From>
-        <eb:PartyId type="urn:x12.org:IO5:01">99999</eb:PartyId>
+        <eb:PartyId type="urn:x12.org:IO5:01">1000</eb:PartyId>
       </eb:From>
       <eb:To>
-        <eb:PartyId type="urn:x12.org:IO5:01">123123</eb:PartyId>
+        <eb:PartyId type="urn:x12.org:IO5:01">1000</eb:PartyId>
       </eb:To>
       <eb:CPAId>{organization}</eb:CPAId>
       <eb:ConversationId>{conversationId}</eb:ConversationId>
       <eb:Service eb:type="OTA">OTA_AirAvailLLSRQ</eb:Service>
       <eb:Action>OTA_AirAvailLLSRQ</eb:Action>
       <eb:MessageData>
-        <eb:MessageId>mid:20001209-133003-2333@clientofsabre.com</eb:MessageId>
-        <eb:Timestamp>2012-06-07T10:00:01Z</eb:Timestamp>
-        <eb:TimeToLive>2013-06-06T23:59:59Z</eb:TimeToLive>
+        <eb:MessageId>{messageId}</eb:MessageId>
+        <eb:Timestamp>{timestamp}</eb:Timestamp>
       </eb:MessageData>
     </eb:MessageHeader>
-    <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
-      <wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">{securityToken}</wsse:BinarySecurityToken>
+    <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"
+                   xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
+      <wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">
+        {securityToken}
+      </wsse:BinarySecurityToken>
     </wsse:Security>
   </SOAP-ENV:Header>
   <SOAP-ENV:Body>
-    <OTA_AirAvailRQ Version="2.0.0" xmlns="http://webservices.sabre.com/sabreXML/2003/07" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <OTA_AirAvailRQ Version="2.0.0" xmlns="http://webservices.sabre.com/sabreXML/2011/10"
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <OriginDestinationInformation>
         <FlightSegment DepartureDateTime="06-06T14:00">
           <ConnectionLocations>
-            <ConnectionLocation LocationCode="SLC"/>
+            <ConnectionLocation LocationCode="SLC" />
           </ConnectionLocations>
-          <DestinationLocation LocationCode="LAS"/>
-          <OriginLocation LocationCode="DFW"/>
+          <DestinationLocation LocationCode="LAS" />
+          <OriginLocation LocationCode="DFW" />
         </FlightSegment>
       </OriginDestinationInformation>
     </OTA_AirAvailRQ>

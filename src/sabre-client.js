@@ -3,6 +3,7 @@ import { createLogger } from './logger'
 import { createRequest } from './soap-client'
 
 const logger = createLogger('sabre:client')
+const timestamp = () => new Date().toISOString()
 
 const securityTokenSelector = R.pipe(
   R.prop('soap-env:Envelope'),
@@ -18,26 +19,39 @@ class SabreClient {
   constructor(requests, args) {
     this.requests = requests
     this.args = args
+    this.messageId = 1000
     this.securityToken = null
   }
 
+  postRequest(request, args) {
+    const requestArgs = {
+      ...args,
+      ...this.args,
+      messageId: this.messageId,
+      timestamp: timestamp(),
+      securityToken: this.securityToken,
+    }
+
+    this.messageId = R.inc(this.messageId)
+    return request(requestArgs)
+  }
+
   sessionCreateRQ() {
-    return this.requests.sessionCreateRQ(this.args).then(response => {
-      const securityToken = securityTokenSelector(response)
-      this.args = R.assoc('securityToken', securityToken, this.args)
+    return this.postRequest(this.requests.sessionCreateRQ, {}).then(response => {
+      this.securityToken = securityTokenSelector(response)
       return response
     })
   }
 
   sessionCloseRQ() {
-    return this.requests.sessionCloseRQ(this.args).then(response => {
-      this.args = R.dissoc('securityToken', this.args)
+    return this.postRequest(this.requests.sessionCloseRQ, {}).then(response => {
+      this.securityToken = null
       return response
     })
   }
 
   otaAirAvailLLSRQ() {
-    return this.requests.otaAirAvailLLSRQ(this.args).then(response => {
+    return this.postRequest(this.requests.otaAirAvailLLSRQ, {}).then(response => {
       return response
     })
   }

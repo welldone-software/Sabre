@@ -2,19 +2,18 @@
   <SOAP-ENV:Header>
     <eb:MessageHeader SOAP-ENV:mustUnderstand="1" eb:version="2.0">
       <eb:From>
-        <eb:PartyId type="urn:x12.org:IO5:01">1212</eb:PartyId>
+        <eb:PartyId type="urn:x12.org:IO5:01">1000</eb:PartyId>
       </eb:From>
       <eb:To>
-        <eb:PartyId type="urn:x12.org:IO5:01">2323</eb:PartyId>
+        <eb:PartyId type="urn:x12.org:IO5:01">1000</eb:PartyId>
       </eb:To>
       <eb:CPAId>{organization}</eb:CPAId>
       <eb:ConversationId>{conversationId}</eb:ConversationId>
       <eb:Service eb:type="OTA">SessionCloseRQ</eb:Service>
       <eb:Action>SessionCloseRQ</eb:Action>
       <eb:MessageData>
-        <eb:MessageId>1001</eb:MessageId>
-        <eb:Timestamp>2012-06-07T10:00:01</eb:Timestamp>
-        <eb:TimeToLive>2013-06-06T23:59:59</eb:TimeToLive>
+        <eb:MessageId>{messageId}</eb:MessageId>
+        <eb:Timestamp>{timestamp}</eb:Timestamp>
       </eb:MessageData>
     </eb:MessageHeader>
     <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
