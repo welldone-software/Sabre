@@ -37,6 +37,7 @@ class SabreClient {
   }
 
   sessionCreateRQ() {
+    logger.info('Creating session.')
     return this.postRequest(this.requests.sessionCreateRQ, {}).then(response => {
       this.securityToken = securityTokenSelector(response)
       return response
@@ -44,6 +45,7 @@ class SabreClient {
   }
 
   sessionCloseRQ() {
+    logger.info('Closing session.')
     return this.postRequest(this.requests.sessionCloseRQ, {}).then(response => {
       this.securityToken = null
       return response
