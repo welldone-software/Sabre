@@ -1,3 +1,4 @@
+import R from 'ramda'
 import { createLogger } from './logger'
 import { createRequest } from './soap-client'
 
@@ -10,22 +11,21 @@ class SabreClient {
   }
 
   sessionCreateRQ() {
-    return this.requests.sessionCreateRQ(this.args)
-      .then(response => {
-        logger.info(JSON.stringify(response, null, ' '))
-        return response
-      })
+    return this.requests.sessionCreateRQ(this.args).then(response => {
+      logger.info(JSON.stringify(response, null, ' '))
+      return response
+    })
   }
 }
 
 export const createSabreClient = (args) => {
-  const requests = {}
+  const requests = {
+    sessionCreateRQ: createRequest('./requests/SessionCreateRQ.xml'),
+    sessionCloseRQ: createRequest('./requests/SessionCloseRQ.xml'),
+  }
 
-  return createRequest('./requests/SessionCreateRQ.xml')
-    .then(request => {
-      requests.sessionCreateRQ = request
-    })
-    .then(() => {
-      return new SabreClient(requests, args)
-    })
+  return Promise.all(R.values(requests)).then(resolved => {
+    const resolvedRequests = R.zipObj(R.keys(requests), resolved)
+    return new SabreClient(resolvedRequests, args)
+  })
 }
