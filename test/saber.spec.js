@@ -29,9 +29,16 @@ describe('Saber', function () {
       })
   })
 
-  it('Should call SessionCreateRQ', function () {
-    return this.soapClient.sessionCreateRQ().then(response => {
-      expect(this.soapClient.securityToken).to.exist
+  it('Should create a session', function () {
+    return this.soapClient.sessionCreateRQ().then(() => {
+      expect(this.soapClient.args.securityToken).to.exist
+      expect(this.soapClient.args.securityToken).to.be.a('string')
+    })
+  })
+
+  it('Should close a session', function () {
+    return this.soapClient.sessionCloseRQ().then(() => {
+      expect(this.soapClient.args.securityToken).to.not.exist
     })
   })
 })

@@ -10,7 +10,9 @@ const securityTokenSelector = R.pipe(
   R.head,
   R.prop('wsse:Security'),
   R.head,
-  R.prop('wsse:BinarySecurityToken'))
+  R.prop('wsse:BinarySecurityToken'),
+  R.head,
+  R.prop('_'))
 
 class SabreClient {
   constructor(requests, args) {
@@ -21,13 +23,15 @@ class SabreClient {
 
   sessionCreateRQ() {
     return this.requests.sessionCreateRQ(this.args).then(response => {
-      this.securityToken = securityTokenSelector(response)
+      const securityToken = securityTokenSelector(response)
+      this.args = R.assoc('securityToken', securityToken, this.args)
       return response
     })
   }
 
   sessionCloseRQ() {
     return this.requests.sessionCloseRQ(this.args).then(response => {
+      this.args = R.dissoc('securityToken', this.args)
       return response
     })
   }
