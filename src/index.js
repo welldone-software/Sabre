@@ -1,1 +1,1 @@
-export * from './sabre'
+export * from './sabre-soap-client'

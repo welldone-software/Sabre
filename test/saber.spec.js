@@ -12,10 +12,16 @@ describe('Saber', function () {
   this.slow(10000)
   this.timeout(10000)
 
+  before(function () {
+    return SabreSoupClient.init()
+  })
 
-
-  it('Should create a soap client', function () {
-    return SabreSoupClient.create().then(saber => {
+  it('Should call SessionCreateRQ', function () {
+    const args = {
+      organization: 'EXT',
+      conversationId: 'session100@sabre.com',
+    }
+    return SabreSoupClient.sessionCreateRQ(args).then(request => {
 
     })
   })
