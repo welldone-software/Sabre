@@ -18,8 +18,11 @@ describe('Saber', function () {
 
   it('Should call SessionCreateRQ', function () {
     const args = {
-      organization: 'EXT',
       conversationId: 'session100@sabre.com',
+      userName: '6krfhcibcj5cld4y',
+      password: 'BgU84Adp',
+      domain: 'DEVCENTER',
+      organization: 'EXT',
     }
     return SabreSoupClient.sessionCreateRQ(args).then(request => {
 

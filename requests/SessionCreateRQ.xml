@@ -11,7 +11,7 @@
         <eb:PartyId type="urn:x12.org:IO5:01">123123</eb:PartyId>
       </eb:To>
       <eb:CPAId>{organization}</eb:CPAId>
-      <eb:ConversationId>${conversationId}</eb:ConversationId>
+      <eb:ConversationId>{conversationId}</eb:ConversationId>
       <eb:Service eb:type="OTA">SessionCreateRQ</eb:Service>
       <eb:Action>SessionCreateRQ</eb:Action>
       <eb:MessageData>
@@ -23,17 +23,17 @@
     <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"
                    xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
       <wsse:UsernameToken>
-        <wsse:Username>${#Project#Username}</wsse:Username>
-        <wsse:Password>${#Project#Password}</wsse:Password>
-        <Organization>${#Project#Organization}</Organization>
-        <Domain>${#Project#Domain}</Domain>
+        <wsse:Username>{userName}</wsse:Username>
+        <wsse:Password>{password}</wsse:Password>
+        <Organization>{organization}</Organization>
+        <Domain>{domain}</Domain>
       </wsse:UsernameToken>
     </wsse:Security>
   </SOAP-ENV:Header>
   <SOAP-ENV:Body>
     <SessionCreateRQ>
       <POS>
-        <Source PseudoCityCode="${#Project#Organization}" />
+        <Source PseudoCityCode="{organization}" />
       </POS>
     </SessionCreateRQ>
   </SOAP-ENV:Body>
