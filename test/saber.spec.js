@@ -4,27 +4,29 @@
 /* eslint-disable prefer-arrow-callback */
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { SabreSoupClient } from 'sabre'
+import { createSabreClient } from 'sabre'
 
-// const testEndpoint = 'https://sws-crt.cert.havail.sabre.com'
+const saberClientArgs = {
+  conversationId: 'session100@sabre.com',
+  userName: '6krfhcibcj5cld4y',
+  password: 'BgU84Adp',
+  organization: 'DEVCENTER',
+  domain: 'EXT',
+}
 
 describe('Saber', function () {
   this.slow(10000)
   this.timeout(10000)
 
   before(function () {
-    return SabreSoupClient.init()
+    return createSabreClient(saberClientArgs)
+      .then(soapClient => {
+        this.soapClient = soapClient
+      })
   })
 
   it('Should call SessionCreateRQ', function () {
-    const args = {
-      conversationId: 'session100@sabre.com',
-      userName: '6krfhcibcj5cld4y',
-      password: 'BgU84Adp',
-      domain: 'DEVCENTER',
-      organization: 'EXT',
-    }
-    return SabreSoupClient.sessionCreateRQ(args).then(request => {
+    return this.soapClient.sessionCreateRQ().then(response => {
 
     })
   })

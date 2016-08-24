@@ -1,5 +1,7 @@
 import fs from 'fs'
+import request from 'request'
 import compile from 'string-template/compile'
+import { parseString }  from './xml'
 
 const readFile = (path) => {
   return new Promise((resolve, reject) => {
@@ -14,14 +16,38 @@ const readFile = (path) => {
   })
 }
 
+const postRequest = (requestBody) => {
+  const options = {
+    method: 'POST',
+    uri: 'https://sws-crt.cert.sabre.com/',
+    headers: {
+      'Content-Type': 'text/xml;charset=UTF-8',
+    },
+    body: requestBody,
+  }
+
+  return new Promise((resolve, reject) => {
+    return request(options, (err, response) => {
+      if (err) {
+        reject(err)
+        return
+      }
+
+      resolve(response)
+    })
+  })
+}
+
 export const createRequest = (path) => {
   return readFile(path).then(template => {
     const compiledTemplate = compile(template)
-    return (args) => {
-      return new Promise((resolve) => {
-        const request = compiledTemplate(args)
-        resolve(request)
+    const request = (args) => {
+      const requestBody = compiledTemplate(args)
+      return postRequest(requestBody).then(response => {
+        return parseString(response.body)
       })
     }
+
+    return request
   })
 }

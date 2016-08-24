@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "debug": "^2.2.0",
-    "ramda": "^0.22.1"
+    "ramda": "^0.22.1",
+    "request": "^2.74.0",
+    "string-template": "^1.0.0",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
