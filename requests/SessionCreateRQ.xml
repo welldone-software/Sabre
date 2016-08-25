@@ -1,39 +1,38 @@
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-                   xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
-                   xmlns:xlink="http://www.w3.org/1999/xlink"
-                   xmlns:xsd="http://www.w3.org/1999/XMLSchema">
-  <SOAP-ENV:Header>
-    <eb:MessageHeader SOAP-ENV:mustUnderstand="1" eb:version="1.0">
-      <eb:From>
-        <eb:PartyId type="urn:x12.org:IO5:01">1000</eb:PartyId>
-      </eb:From>
-      <eb:To>
-        <eb:PartyId type="urn:x12.org:IO5:01">1000</eb:PartyId>
-      </eb:To>
-      <eb:CPAId>{organization}</eb:CPAId>
-      <eb:ConversationId>{conversationId}</eb:ConversationId>
-      <eb:Service eb:type="OTA">SessionCreateRQ</eb:Service>
-      <eb:Action>SessionCreateRQ</eb:Action>
-      <eb:MessageData>
-        <eb:MessageId>{messageId}</eb:MessageId>
-        <eb:Timestamp>{timestamp}</eb:Timestamp>
-      </eb:MessageData>
-    </eb:MessageHeader>
-    <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"
-                   xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
-      <wsse:UsernameToken>
-        <wsse:Username>{userName}</wsse:Username>
-        <wsse:Password>{password}</wsse:Password>
-        <Organization>{organization}</Organization>
-        <Domain>{domain}</Domain>
-      </wsse:UsernameToken>
-    </wsse:Security>
-  </SOAP-ENV:Header>
-  <SOAP-ENV:Body>
-    <SessionCreateRQ>
-      <POS>
-        <Source PseudoCityCode="{organization}" />
-      </POS>
-    </SessionCreateRQ>
-  </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext"
+                  xmlns:mes="http://www.ebxml.org/namespaces/messageHeader"
+                  xmlns:ns="http://www.opentravel.org/OTA/2002/11">
+<soapenv:Header>
+  <sec:Security>
+    <sec:UsernameToken>
+      <sec:Username>{userName}</sec:Username>
+      <sec:Password>{password}</sec:Password>
+      <Organization>{organization}</Organization>
+      <Domain>{domain}</Domain>
+    </sec:UsernameToken>
+  </sec:Security>
+  <mes:MessageHeader mes:id="?" mes:version="1.0.00">
+    <mes:From>
+      <mes:PartyId mes:type="urn:x12.org:IO5:01">1000</mes:PartyId>
+    </mes:From>
+    <mes:To>
+      <mes:PartyId mes:type="urn:x12.org:IO5:01">1000</mes:PartyId>
+    </mes:To>
+    <mes:CPAId>{organization}</mes:CPAId>
+    <mes:ConversationId>{conversationId}</mes:ConversationId>
+    <mes:Service mes:type="OTA">SessionCreateRQ</mes:Service>
+    <mes:Action>SessionCreateRQ</mes:Action>
+    <mes:MessageData>
+      <mes:MessageId>{messageId}</mes:MessageId>
+      <mes:Timestamp>{timestamp}</mes:Timestamp>
+    </mes:MessageData>
+  </mes:MessageHeader>
+</soapenv:Header>
+<soapenv:Body>
+  <ns:SessionCreateRQ returnContextID="?">
+    <ns:POS>
+      <ns:Source PseudoCityCode="?" />
+    </ns:POS>
+  </ns:SessionCreateRQ>
+</soapenv:Body>
+</soapenv:Envelope>
