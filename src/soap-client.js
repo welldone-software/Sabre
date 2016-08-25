@@ -38,7 +38,7 @@ const readFile = (path) => {
 const postRequest = (requestXml) => {
   const options = {
     method: 'POST',
-    uri: 'https://sws-crt.cert.sabre.com/',
+    uri: 'https://sws-crt.cert.havail.sabre.com',
     headers: {
       'Content-Type': 'text/xml;charset=UTF-8',
     },
@@ -75,7 +75,7 @@ export const createRequest = (path) => {
             error.body = response.body
             error.code = errorCodeSelector(soapError)
             error.message = errorStringSelector(soapError)
-            throw error
+            Promise.reject(error)
           }
 
           return response.body

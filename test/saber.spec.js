@@ -36,7 +36,13 @@ describe('Saber', function () {
     })
   })
 
-  it('Should send OTA_AirAvailLLSRQ', function () {
+  it('Should send SabreCommandLLSRQ', function () {
+    return this.soapClient.sabreCommandLLSRQ().then(() => {
+
+    })
+  })
+
+  it.skip('Should send OTA_AirAvailLLSRQ', function () {
     return this.soapClient.otaAirAvailLLSRQ().then(() => {
 
     })
