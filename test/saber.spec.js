@@ -12,11 +12,13 @@ const logger = createLogger('sabre:client')
 
 const saberClientArgs = {
   conversationId: 'session100@sabre.com',
-  userName: '6krfhcibcj5cld4y',
-  password: 'BgU84Adp',
-  organization: 'DEVCENTER',
+  userName: '286188',
+  password: 'WS358137',
+  organization: 'I8AI',
   domain: 'EXT',
 }
+
+
 
 describe('Saber', function () {
   this.slow(10000)
