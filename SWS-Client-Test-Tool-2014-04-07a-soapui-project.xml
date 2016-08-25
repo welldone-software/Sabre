@@ -18689,7 +18689,146 @@ WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH 
          </OriginDestinationInformation>
       </OTA_AirAvailRQ>
    </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="https://webservices.sabre.com/websvc/OTA_AirAvailPortType/OTA_AirAvailRQRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="IgnoreTransactionSoapBinding" type="wsdl" bindingName="{https://webservices.sabre.com/websvc}IgnoreTransactionSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/IgnoreTransactionLLSRQ.wsdl" id="c483fbc9-98ec-4d5b-a6de-c4400d12b1f0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/IgnoreTransactionLLSRQ.wsdl"><con:part><con:url>http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/IgnoreTransactionLLSRQ.wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="https://webservices.sabre.com/websvc" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://webservices.sabre.com/sabreXML/2003/07" xmlns:tns="https://webservices.sabre.com/websvc" xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="https://webservices.sabre.com/websvc/OTA_AirAvailPortType/OTA_AirAvailRQRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="5ab7fa0c-b4f8-4129-9a41-156d50f03c19" name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://webservices.sabre.com/websvc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:mes="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns="http://webservices.sabre.com/sabreXML/2003/07">
+   <soapenv:Header>
+      <sec:Security>
+         <!--Optional:-->
+         <sec:UsernameToken>
+            <!--Optional:-->
+            <sec:Username>?</sec:Username>
+            <!--Optional:-->
+            <sec:Password>?</sec:Password>
+            <!--0 to 2 repetitions:-->
+            <sec:NewPassword>?</sec:NewPassword>
+            <!--Optional:-->
+            <Organization>?</Organization>
+            <!--Optional:-->
+            <Domain>?</Domain>
+         </sec:UsernameToken>
+         <!--Optional:-->
+         <sec:SabreAth>?</sec:SabreAth>
+         <!--Optional:-->
+         <sec:BinarySecurityToken>?</sec:BinarySecurityToken>
+      </sec:Security>
+      <mes:MessageHeader mes:id="?" mes:version="?">
+         <mes:From>
+            <!--1 or more repetitions:-->
+            <mes:PartyId mes:type="?">?</mes:PartyId>
+            <!--Optional:-->
+            <mes:Role>?</mes:Role>
+         </mes:From>
+         <mes:To>
+            <!--1 or more repetitions:-->
+            <mes:PartyId mes:type="?">?</mes:PartyId>
+            <!--Optional:-->
+            <mes:Role>?</mes:Role>
+         </mes:To>
+         <mes:CPAId>?</mes:CPAId>
+         <mes:ConversationId>?</mes:ConversationId>
+         <mes:Service mes:type="?">?</mes:Service>
+         <mes:Action>?</mes:Action>
+         <mes:MessageData>
+            <mes:MessageId>?</mes:MessageId>
+            <mes:Timestamp>?</mes:Timestamp>
+            <!--Optional:-->
+            <mes:RefToMessageId>?</mes:RefToMessageId>
+            <!--Optional:-->
+            <mes:TimeToLive>?</mes:TimeToLive>
+            <!--Optional:-->
+            <mes:Timeout>?</mes:Timeout>
+         </mes:MessageData>
+         <!--Optional:-->
+         <mes:DuplicateElimination>?</mes:DuplicateElimination>
+         <!--Zero or more repetitions:-->
+         <mes:Description xml:lang="?">?</mes:Description>
+         <!--You may enter ANY elements at this point-->
+      </mes:MessageHeader>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ns:OTA_AirAvailRQ EchoToken="?" TimeStamp="?" Target="Production" Version="?" SequenceNmbr="?" PrimaryLangID="?" AltLangID="?">
+         <!--Optional:-->
+         <ns:POS>
+            <!--Optional:-->
+            <ns:Source PseudoCityCode="?"/>
+         </ns:POS>
+         <!--Optional:-->
+         <ns:TPA_Extensions>
+            <!--Optional:-->
+            <ns:MessagingDetails>
+               <!--Optional:-->
+               <ns:MDRSubset Code="?"/>
+            </ns:MessagingDetails>
+         </ns:TPA_Extensions>
+         <!--Optional:-->
+         <ns:OriginDestinationInformation ExcludeCodeShare="false">
+            <!--Optional:-->
+            <ns:DepartureDateTime WindowBefore="?" WindowAfter="?" DateTime="?">?</ns:DepartureDateTime>
+            <!--Optional:-->
+            <ns:OriginLocation LocationCode="?" CodeContext="IATA"/>
+            <!--Optional:-->
+            <ns:TPA_Extensions>
+               <!--Optional:-->
+               <ns:Scan Ind="?"/>
+               <!--Optional:-->
+               <ns:ArrivalDateTime WindowBefore="?" WindowAfter="?" DateTime="?"/>
+            </ns:TPA_Extensions>
+            <!--Optional:-->
+            <ns:DestinationLocation LocationCode="?" CodeContext="IATA"/>
+            <!--Optional:-->
+            <ns:ConnectionLocations>
+               <!--Zero or more repetitions:-->
+               <ns:ConnectionLocation LocationCode="?" CodeContext="IATA" MinChangeTime="?" MaxChangeTime="?">
+                  <!--Optional:-->
+                  <ns:TPA_Extensions>
+                     <!--Optional:-->
+                     <ns:ExcludeCodeshare Ind="false"/>
+                     <!--Zero or more repetitions:-->
+                     <ns:Airline Code="?" Any="false" Exclude="false"/>
+                  </ns:TPA_Extensions>
+               </ns:ConnectionLocation>
+            </ns:ConnectionLocations>
+         </ns:OriginDestinationInformation>
+         <!--Optional:-->
+         <ns:SpecificFlightInfo>
+            <!--Optional:-->
+            <ns:FlightNumber Number="?"/>
+            <!--Optional:-->
+            <ns:Airline Code="?">?</ns:Airline>
+            <!--Optional:-->
+            <ns:BookingClassPref ResBookDesigCode="?"/>
+            <!--Optional:-->
+            <ns:TPA_Extensions>
+               <!--Optional:-->
+               <ns:DepartureDateTime WindowBefore="?" WindowAfter="?" DateTime="?"/>
+               <!--Optional:-->
+               <ns:OriginLocation LocationCode="?" CodeContext="IATA"/>
+               <!--Optional:-->
+               <ns:DestinationLocation LocationCode="?" CodeContext="IATA"/>
+               <!--Optional:-->
+               <ns:AdditionalAvail Ind="false" ClassInd="false" MoveDown="false"/>
+            </ns:TPA_Extensions>
+         </ns:SpecificFlightInfo>
+         <!--Optional:-->
+         <ns:TravelPreferences MaxStopsQuantity="?">
+            <!--Zero or more repetitions:-->
+            <ns:VendorPref Code="?"/>
+            <!--Optional:-->
+            <ns:CabinPref Number="?" Cabin="?"/>
+            <!--Optional:-->
+            <ns:TPA_Extensions>
+               <!--Zero or more repetitions:-->
+               <ns:ExcludeVendorPref Code="?"/>
+               <!--Optional:-->
+               <ns:PromotionalSpot CodeType="?"/>
+               <!--Optional:-->
+               <ns:CharteredAirline Desired="false"/>
+               <!--Optional:-->
+               <ns:DirectAccess Ind="false"/>
+            </ns:TPA_Extensions>
+         </ns:TravelPreferences>
+      </ns:OTA_AirAvailRQ>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="OTA"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="IgnoreTransactionSoapBinding" type="wsdl" bindingName="{https://webservices.sabre.com/websvc}IgnoreTransactionSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/IgnoreTransactionLLSRQ.wsdl" id="c483fbc9-98ec-4d5b-a6de-c4400d12b1f0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/IgnoreTransactionLLSRQ.wsdl"><con:part><con:url>http://webservices.sabre.com/wsdl/sabreXML1.0.00/tpf/IgnoreTransactionLLSRQ.wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="https://webservices.sabre.com/websvc" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://webservices.sabre.com/sabreXML/2003/07" xmlns:tns="https://webservices.sabre.com/websvc" xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
   <types>
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <xsd:import namespace="http://webservices.sabre.com/sabreXML/2003/07" schemaLocation="IgnoreTransactionLLSRQRS.xsd"/>
