@@ -44,7 +44,7 @@ const readFile = (path) => {
 const postRequest = (requestXml) => {
   const options = {
     method: 'POST',
-    uri: 'https://sws-crt.cert.havail.sabre.com',
+    uri: 'https://sws-crt-as.cert.havail.sabre.com',
     headers: {
       'Content-Type': 'text/xml;charset=UTF-8',
     },
