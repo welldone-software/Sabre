@@ -1,6 +1,5 @@
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
                    xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
-                   xmlns:xlink="http://www.w3.org/1999/xlink"
                    xmlns:xsd="http://www.w3.org/1999/XMLSchema">
   <SOAP-ENV:Header>
     <eb:MessageHeader SOAP-ENV:mustUnderstand="1" eb:version="1.0">
@@ -19,17 +18,14 @@
         <eb:Timestamp>{timestamp}</eb:Timestamp>
       </eb:MessageData>
     </eb:MessageHeader>
-    <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"
-                   xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/12/utility">
+    <wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
       <wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">
         {securityToken}
       </wsse:BinarySecurityToken>
     </wsse:Security>
   </SOAP-ENV:Header>
   <SOAP-ENV:Body>
-    <OTA_AirAvailRQ Version="2.0.0" xmlns="http://webservices.sabre.com/sabreXML/2003/07"
-                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <OTA_AirAvailRQ Version="1.10.1" xmlns="http://webservices.sabre.com/sabreXML/2003/07">
       <OriginDestinationInformation>
         <FlightSegment DepartureDateTime="06-06T14:00">
           <ConnectionLocations>
