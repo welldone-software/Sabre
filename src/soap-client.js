@@ -7,6 +7,12 @@ import { createLogger } from './logger'
 
 const logger = createLogger('sabre:client')
 
+const isErrorSelector = R.pipe(
+  R.prop('soap-env:Envelope'),
+  R.prop('soap-env:Body'),
+  R.head,
+  R.prop('soap-env:Fault'))
+
 const errorSelector = R.pipe(
   R.prop('soap-env:Envelope'),
   R.prop('soap-env:Body'),
@@ -69,13 +75,14 @@ export const createRequest = (path) => {
           return parseString(response.body).then(body => ({ ...response, body }))
         })
         .then(response => {
-          if (response.statusCode !== 200) {
-            const soapError = errorSelector(response.body)
+          if (response.statusCode !== 200 || isErrorSelector(response.body)) {
             const error = new Error()
+            const soapError = errorSelector(response.body)
+
             error.body = response.body
             error.code = errorCodeSelector(soapError)
             error.message = errorStringSelector(soapError)
-            Promise.reject(error)
+            throw error
           }
 
           return response.body

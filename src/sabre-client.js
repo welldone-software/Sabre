@@ -63,6 +63,12 @@ class SabreClient {
       return response
     })
   }
+
+  otaAirScheduleRQ() {
+    return this.postRequest(this.requests.otaAirScheduleRQ, {}).then(response => {
+      return response
+    })
+  }
 }
 
 export const createSabreClient = (args) => {
@@ -71,6 +77,7 @@ export const createSabreClient = (args) => {
     sessionCloseRQ: createRequest('./requests/SessionCloseRQ.xml'),
     sabreCommandLLSRQ: createRequest('./requests/SabreCommandLLSRQ.xml'),
     otaAirAvailLLSRQ: createRequest('./requests/OTA_AirAvailLLSRQ.xml'),
+    otaAirScheduleRQ: createRequest('./requests/OTA_AirScheduleRQ.xml'),
   }
 
   return Promise.all(R.values(requests)).then(resolved => {
