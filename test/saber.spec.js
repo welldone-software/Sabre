@@ -3,22 +3,16 @@
 /* eslint-disable func-names */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-arrow-callback */
-import sinon from 'sinon'
 import { expect } from 'chai'
-import { createLogger } from 'sabre/logger'
 import { createSabreClient } from 'sabre'
-
-const logger = createLogger('sabre:client')
 
 const saberClientArgs = {
   conversationId: 'session100@sabre.com',
   userName: '286188',
   password: 'WS358137',
   organization: 'I8AI',
-  domain: 'EXT',
+  domain: 'DEFAULT',
 }
-
-
 
 describe('Saber', function () {
   this.slow(10000)
@@ -44,13 +38,13 @@ describe('Saber', function () {
     })
   })
 
-  it.skip('Should send OTA_AirAvailLLSRQ', function () {
+  it('Should send OTA_AirAvailLLSRQ', function () {
     return this.soapClient.otaAirAvailLLSRQ().then(() => {
 
     })
   })
 
-  it('Should send OTA_AirScheduleRQ', function () {
+  it.skip('Should send OTA_AirScheduleRQ', function () {
     return this.soapClient.otaAirScheduleRQ().then(() => {
 
     })

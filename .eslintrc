@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": "airbnb-base",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
@@ -18,8 +18,6 @@
     "no-mixed-operators": ["off"],
     "global-require": ["off"],
     "import/no-unresolved": ["off"],
-    "jsx-quotes": ["error", "prefer-single"],
-    "react/jsx-filename-extension": ["off"],
     "import/prefer-default-export": ["off"],
     "import/no-extraneous-dependencies": ["off"],
     "import/no-named-as-default": ["off"],

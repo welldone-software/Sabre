@@ -26,9 +26,9 @@
 <soapenv:Body>
   <ns:OTA_AirAvailRQ Version="2.3.0">
     <ns:OriginDestinationInformation>
-      <ns:FlightSegment DepartureDateTime="12-21">
-        <ns:DestinationLocation LocationCode="LHR"/>
-        <ns:OriginLocation LocationCode="DFW"/>
+      <ns:FlightSegment>
+        <ns:DestinationLocation LocationCode="JFK"/>
+        <ns:OriginLocation LocationCode="TLV"/>
       </ns:FlightSegment>
     </ns:OriginDestinationInformation>  </ns:OTA_AirAvailRQ>
 </soapenv:Body>

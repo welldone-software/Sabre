@@ -1,11 +1,11 @@
 {
-  "name": "Sabre",
+  "name": "welldone-sabre",
   "version": "0.0.1",
   "private": true,
   "main": "dist",
   "scripts": {
     "lint": "eslint \"**/*.js\"",
-    "test": "npm run lint && mocha --compilers: js:babel-register \"test/**/*.spec.js\""
+    "test": "mocha --compilers: js:babel-register \"test/**/*.spec.js\""
   },
   "dependencies": {
     "debug": "^2.2.0",
@@ -15,18 +15,16 @@
     "xml2js": "^0.4.17"
   },
   "devDependencies": {
-    "babel-cli": "^6.10.1",
+    "babel-cli": "^6.14.0",
     "babel-plugin-module-alias": "^1.5.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
-    "babel-preset-es2015": "^6.13.2",
-    "babel-register": "^6.7.2",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.14.0",
     "chai": "^3.5.0",
-    "eslint": "^3.0.1",
+    "eslint": "^3.4.0",
     "eslint-config-airbnb": "^10.0.0",
     "eslint-import-resolver-babel-module-alias": "^1.5.0",
     "eslint-plugin-import": "^1.10.2",
-    "eslint-plugin-jsx-a11y": "^2.0.1",
-    "eslint-plugin-react": "^6.0.0",
     "mocha": "^3.0.1",
     "mocha-junit-reporter": "^1.11.1",
     "sinon": "^1.17.4"
