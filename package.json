@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "lint": "eslint \"**/*.js\"",
-    "test": "mocha --compilers: js:babel-register \"test/**/*.spec.js\""
+    "test": "mocha"
   },
   "dependencies": {
     "debug": "^2.2.0",
