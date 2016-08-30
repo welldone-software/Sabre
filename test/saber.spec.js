@@ -51,6 +51,7 @@ describe('Saber', function () {
     return this.soapClient
       .otaAirBookRQ({
         flightNumber: flightSegment.FlightNumber,
+        marketingAirline: flightSegment.MarketingAirline.Code,
         originLocation: flightSegment.OriginLocation.LocationCode,
         destinationLocation: flightSegment.DestinationLocation.LocationCode,
         departureDateTime: flightSegment.DepartureDateTime,
