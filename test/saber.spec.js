@@ -5,7 +5,7 @@
 /* eslint-disable prefer-arrow-callback */
 import { expect } from 'chai'
 import R from 'ramda'
-import { createSabreClient, flightSegmentsSelector, flightSegmentSelector } from 'sabre'
+import { createSabreClient, flightSegmentsSelector } from 'sabre'
 
 describe('Saber', function () {
   this.slow(10000)
@@ -23,7 +23,7 @@ describe('Saber', function () {
     })
   })
 
-  it('Should create a session', function () {
+  it('Should create a session (SessionCreateRQ)', function () {
     return this.soapClient.sessionCreateRQ().then(() => {
       expect(this.soapClient.messageId).to.equal(1001)
       expect(this.soapClient.securityToken).to.exist
@@ -31,22 +31,39 @@ describe('Saber', function () {
     })
   })
 
-  it('Should send OTA_AirAvailLLSRQ', function () {
-    return this.soapClient.otaAirAvailLLSRQ({
+  it('Should search for tickets (OTA_AirAvailLLSRQ)', function () {
+    return this.soapClient
+      .otaAirAvailLLSRQ({
         originLocation: 'TLV',
         destinationLocation: 'JFK',
       })
       .then((response) => {
-        const flightSegments = flightSegmentsSelector(0)(response)
-        expect(flightSegments).to.not.be.empty
-        expect(R.head(flightSegments).OriginLocation.LocationCode).to.equal('TLV')
-        expect(R.last(flightSegments).DestinationLocation.LocationCode).to.equal('JFK')
-
-        this.sampleFlightSegment = flightSegmentSelector(0, 0)(response)
-    })
+        this.flightSegments = flightSegmentsSelector(0)(response)
+        expect(this.flightSegments).to.not.be.empty
+        expect(R.head(this.flightSegments).OriginLocation.LocationCode).to.equal('TLV')
+        expect(R.last(this.flightSegments).DestinationLocation.LocationCode).to.equal('JFK')
+      })
   })
 
-  it('Should close a session', function () {
+  it('Should book a flight segment (OTA_AirBookRQ)', function () {
+    const flightSegment = R.head(this.flightSegments)
+
+    return this.soapClient
+      .otaAirBookRQ({
+        flightNumber: flightSegment.FlightNumber,
+        originLocation: flightSegment.OriginLocation.LocationCode,
+        destinationLocation: flightSegment.DestinationLocation.LocationCode,
+        departureDateTime: flightSegment.DepartureDateTime,
+        arrivalDateTime: flightSegment.ArrivalDateTime,
+        numberInParty: '1',
+        resBookDesigCode: 'Y',
+      })
+      .then((response) => {
+
+      })
+  })
+
+  it('Should close a session (sessionCloseRQ)', function () {
     return this.soapClient.sessionCloseRQ().then(() => {
       expect(this.soapClient.securityToken).to.not.exist
     })

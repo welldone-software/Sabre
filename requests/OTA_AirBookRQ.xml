@@ -16,7 +16,7 @@
       <mes:CPAId>{organization}</mes:CPAId>
       <mes:ConversationId>{conversationId}</mes:ConversationId>
       <mes:Service mes:type="sabreXML">OTA</mes:Service>
-      <mes:Action>OTA_AirBookRQ</mes:Action>
+      <mes:Action>OTA_AirBookLLSRQ</mes:Action>
       <mes:MessageData>
         <mes:MessageId>{messageId}</mes:MessageId>
         <mes:Timestamp>{timestamp}</mes:Timestamp>
@@ -28,8 +28,7 @@
       <ns:OriginDestinationInformation>
         <!--1 to 10 repetitions:-->
         <ns:FlightSegment
-          ArrivalDateTime="{ArrivalDateTime}"
-          BrandID="{brandID}"
+          ArrivalDateTime="{arrivalDateTime}"
           DepartureDateTime="{departureDateTime}"
           FlightNumber="{flightNumber}"
           NumberInParty="{numberInParty}"

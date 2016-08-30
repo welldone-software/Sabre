@@ -64,12 +64,22 @@ class SabreClient {
   }
 
   otaAirBookRQ({
+    flightNumber,
     originLocation,
     destinationLocation,
+    departureDateTime,
+    arrivalDateTime,
+    numberInParty,
+    resBookDesigCode,
   }) {
     return this.postRequest(this.requests.otaAirBookRQ, {
+      flightNumber,
       originLocation,
       destinationLocation,
+      departureDateTime,
+      arrivalDateTime,
+      numberInParty,
+      resBookDesigCode,
     }).then(response => {
       return response
     })
