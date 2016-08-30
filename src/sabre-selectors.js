@@ -7,20 +7,20 @@ export const securityTokenSelector = R.pipe(
   R.prop('wsse:BinarySecurityToken'),
   R.prop('_'))
 
-const originDestinationOptionsSelector = R.pipe(
+export const originDestinationOptionsSelector = R.pipe(
   R.prop('soap-env:Envelope'),
   R.prop('soap-env:Body'),
   R.prop('OTA_AirAvailRS'),
   R.prop('OriginDestinationOptions'))
 
-const originDestinationOptionSelector = index1 => R.pipe(
+export const originDestinationOptionSelector = option => R.pipe(
   originDestinationOptionsSelector,
   R.prop('OriginDestinationOption'),
-  R.nth(index1))
+  R.nth(option))
 
-const flightSegmentSelector = (index1, index2) => R.pipe(
-  originDestinationOptionSelector(index1),
+export const flightSegmentSelector = (option, flightSegment) => R.pipe(
+  originDestinationOptionSelector(option),
   R.prop('FlightSegment'),
-  R.nth(index2),
+  R.nth(flightSegment),
   R.omit('DaysOfOperation'),
   R.omit('BookingClassAvail'))

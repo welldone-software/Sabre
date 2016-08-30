@@ -24,20 +24,20 @@
     </mes:MessageHeader>
   </soapenv:Header>
   <soapenv:Body>
-    <ns:OTA_AirBookRQ ReturnHostCommand="?" TimeStamp="?" Version="2.1.0">
+    <ns:OTA_AirBookRQ Version="2.1.0">
       <ns:OriginDestinationInformation>
         <!--1 to 10 repetitions:-->
         <ns:FlightSegment
-          ArrivalDateTime="?"
-          BrandID="?"
-          DepartureDateTime="?"
-          FlightNumber="?"
-          NumberInParty="?"
-          ResBookDesigCode="?"
-          Status="?">
-          <ns:DestinationLocation LocationCode="?" />
-          <ns:MarketingAirline Code="?" FlightNumber="?" />
-          <ns:OriginLocation LocationCode="?" />
+          ArrivalDateTime="{ArrivalDateTime}"
+          BrandID="{brandID}"
+          DepartureDateTime="{departureDateTime}"
+          FlightNumber="{flightNumber}"
+          NumberInParty="{numberInParty}"
+          ResBookDesigCode="{resBookDesigCode}"
+          Status="NN">
+          <ns:DestinationLocation LocationCode="{destinationLocation}" />
+          <ns:MarketingAirline Code="{marketingAirline}" FlightNumber="{flightNumber}" />
+          <ns:OriginLocation LocationCode="{originLocation}" />
         </ns:FlightSegment>
       </ns:OriginDestinationInformation>
     </ns:OTA_AirBookRQ>

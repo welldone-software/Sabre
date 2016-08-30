@@ -4,22 +4,20 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-arrow-callback */
 import { expect } from 'chai'
-import { createSabreClient } from 'sabre'
-
-const saberClientArgs = {
-  conversationId: 'session100@sabre.com',
-  userName: '286188',
-  password: 'WS358137',
-  organization: 'I8AI',
-  domain: 'DEFAULT',
-}
+import { createSabreClient, flightSegmentSelector } from 'sabre'
 
 describe('Saber', function () {
   this.slow(10000)
   this.timeout(10000)
 
   before(function () {
-    return createSabreClient(saberClientArgs).then(soapClient => {
+    return createSabreClient({
+      conversationId: 'session100@sabre.com',
+      userName: '286188',
+      password: 'WS358137',
+      organization: 'I8AI',
+      domain: 'DEFAULT',
+    }).then(soapClient => {
       this.soapClient = soapClient
     })
   })
@@ -33,8 +31,13 @@ describe('Saber', function () {
   })
 
   it('Should send OTA_AirAvailLLSRQ', function () {
-    return this.soapClient.otaAirAvailLLSRQ('TLV', 'JFK').then(() => {
-
+    return this.soapClient.otaAirAvailLLSRQ({
+        originLocation: 'TLV',
+        destinationLocation: 'JFK',
+      })
+      .then((response) => {
+        this.sampleFlightSegment = flightSegmentSelector(0, 0)(response)
+        expect(this.sampleFlightSegment.OriginLocation.LocationCode).to.equal('TLV')
     })
   })
 

@@ -43,7 +43,10 @@ class SabreClient {
     })
   }
 
-  otaAirAvailLLSRQ(originLocation, destinationLocation) {
+  otaAirAvailLLSRQ({
+    originLocation,
+    destinationLocation,
+  }) {
     return this.postRequest(
       this.requests.otaAirAvailLLSRQ, {
         originLocation,
@@ -60,8 +63,14 @@ class SabreClient {
     })
   }
 
-  otaAirBookRQ() {
-    return this.postRequest(this.requests.otaAirBookRQ, {}).then(response => {
+  otaAirBookRQ({
+    originLocation,
+    destinationLocation,
+  }) {
+    return this.postRequest(this.requests.otaAirBookRQ, {
+      originLocation,
+      destinationLocation,
+    }).then(response => {
       return response
     })
   }
