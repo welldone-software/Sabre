@@ -27,8 +27,8 @@
   <ns:OTA_AirAvailRQ Version="2.3.0">
     <ns:OriginDestinationInformation>
       <ns:FlightSegment>
-        <ns:DestinationLocation LocationCode="JFK"/>
-        <ns:OriginLocation LocationCode="TLV"/>
+        <ns:DestinationLocation LocationCode="{destinationLocation}"/>
+        <ns:OriginLocation LocationCode="{originLocation}"/>
       </ns:FlightSegment>
     </ns:OriginDestinationInformation>  </ns:OTA_AirAvailRQ>
 </soapenv:Body>

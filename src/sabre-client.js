@@ -52,20 +52,25 @@ class SabreClient {
     })
   }
 
-  sabreCommandLLSRQ() {
-    return this.postRequest(this.requests.sabreCommandLLSRQ, {}).then(response => {
-      return response
-    })
-  }
-
-  otaAirAvailLLSRQ() {
-    return this.postRequest(this.requests.otaAirAvailLLSRQ, {}).then(response => {
-      return response
-    })
+  otaAirAvailLLSRQ(originLocation, destinationLocation) {
+    return this.postRequest(
+      this.requests.otaAirAvailLLSRQ, {
+        originLocation,
+        destinationLocation,
+      })
+      .then(response => {
+        return response
+      })
   }
 
   otaAirScheduleRQ() {
     return this.postRequest(this.requests.otaAirScheduleRQ, {}).then(response => {
+      return response
+    })
+  }
+
+  otaAirBookRQ() {
+    return this.postRequest(this.requests.otaAirBookRQ, {}).then(response => {
       return response
     })
   }
@@ -75,9 +80,9 @@ export const createSabreClient = (args) => {
   const requests = {
     sessionCreateRQ: createRequest('./requests/SessionCreateRQ.xml'),
     sessionCloseRQ: createRequest('./requests/SessionCloseRQ.xml'),
-    sabreCommandLLSRQ: createRequest('./requests/SabreCommandLLSRQ.xml'),
     otaAirAvailLLSRQ: createRequest('./requests/OTA_AirAvailLLSRQ.xml'),
     otaAirScheduleRQ: createRequest('./requests/OTA_AirScheduleRQ.xml'),
+    otaAirBookRQ: createRequest('./requests/OTA_AirBookRQ.xml'),
   }
 
   return Promise.all(R.values(requests)).then(resolved => {
