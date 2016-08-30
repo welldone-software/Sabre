@@ -1,19 +1,10 @@
 import R from 'ramda'
 import { createLogger } from './logger'
 import { createRequest } from './soap-client'
+import { securityTokenSelector } from './sabre-selectors'
 
 const logger = createLogger('sabre:client')
 const timestamp = () => new Date().toISOString()
-
-const securityTokenSelector = R.pipe(
-  R.prop('soap-env:Envelope'),
-  R.prop('soap-env:Header'),
-  R.head,
-  R.prop('wsse:Security'),
-  R.head,
-  R.prop('wsse:BinarySecurityToken'),
-  R.head,
-  R.prop('_'))
 
 class SabreClient {
   constructor(requests, args) {
