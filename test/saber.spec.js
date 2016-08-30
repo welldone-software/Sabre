@@ -4,7 +4,8 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-arrow-callback */
 import { expect } from 'chai'
-import { createSabreClient, flightSegmentSelector } from 'sabre'
+import R from 'ramda'
+import { createSabreClient, flightSegmentsSelector, flightSegmentSelector } from 'sabre'
 
 describe('Saber', function () {
   this.slow(10000)
@@ -36,14 +37,12 @@ describe('Saber', function () {
         destinationLocation: 'JFK',
       })
       .then((response) => {
+        const flightSegments = flightSegmentsSelector(0)(response)
+        expect(flightSegments).to.not.be.empty
+        expect(R.head(flightSegments).OriginLocation.LocationCode).to.equal('TLV')
+        expect(R.last(flightSegments).DestinationLocation.LocationCode).to.equal('JFK')
+
         this.sampleFlightSegment = flightSegmentSelector(0, 0)(response)
-        expect(this.sampleFlightSegment.OriginLocation.LocationCode).to.equal('TLV')
-    })
-  })
-
-  it.skip('Should send OTA_AirScheduleRQ', function () {
-    return this.soapClient.otaAirScheduleRQ().then(() => {
-
     })
   })
 

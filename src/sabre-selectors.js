@@ -18,9 +18,12 @@ export const originDestinationOptionSelector = option => R.pipe(
   R.prop('OriginDestinationOption'),
   R.nth(option))
 
-export const flightSegmentSelector = (option, flightSegment) => R.pipe(
+export const flightSegmentsSelector = (option) => R.pipe(
   originDestinationOptionSelector(option),
-  R.prop('FlightSegment'),
+  R.prop('FlightSegment'))
+
+export const flightSegmentSelector = (option, flightSegment) => R.pipe(
+  flightSegmentsSelector(option),
   R.nth(flightSegment),
   R.omit('DaysOfOperation'),
   R.omit('BookingClassAvail'))
