@@ -5,7 +5,13 @@
 /* eslint-disable prefer-arrow-callback */
 import { expect } from 'chai'
 import R from 'ramda'
+import moment from 'moment'
 import { createSabreClient, flightSegmentsSelector } from 'sabre'
+
+const safeHead = R.ifElse(R.isArrayLike, R.head, R.identity)
+const safeLast = R.ifElse(R.isArrayLike, R.last, R.identity)
+
+const timeWithYear = time => moment(time, 'MM-DDTHH:mm').format('YYYY-MM-DDTHH:mm')
 
 describe('Saber', function () {
   this.slow(10000)
@@ -40,13 +46,13 @@ describe('Saber', function () {
       .then((response) => {
         this.flightSegments = flightSegmentsSelector(0)(response)
         expect(this.flightSegments).to.not.be.empty
-        expect(R.head(this.flightSegments).OriginLocation.LocationCode).to.equal('TLV')
-        expect(R.last(this.flightSegments).DestinationLocation.LocationCode).to.equal('JFK')
+        expect(safeHead(this.flightSegments).OriginLocation.LocationCode).to.equal('TLV')
+        expect(safeLast(this.flightSegments).DestinationLocation.LocationCode).to.equal('JFK')
       })
   })
 
   it('Should book a flight segment (OTA_AirBookRQ)', function () {
-    const flightSegment = R.head(this.flightSegments)
+    const flightSegment = safeHead(this.flightSegments)
 
     return this.soapClient
       .otaAirBookRQ({
@@ -54,8 +60,8 @@ describe('Saber', function () {
         marketingAirline: flightSegment.MarketingAirline.Code,
         originLocation: flightSegment.OriginLocation.LocationCode,
         destinationLocation: flightSegment.DestinationLocation.LocationCode,
-        departureDateTime: flightSegment.DepartureDateTime,
-        arrivalDateTime: flightSegment.ArrivalDateTime,
+        departureDateTime: timeWithYear(flightSegment.DepartureDateTime),
+        arrivalDateTime: timeWithYear(flightSegment.ArrivalDateTime),
         numberInParty: '1',
         resBookDesigCode: 'Y',
       })

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "debug": "^2.2.0",
+    "moment": "^2.14.1",
     "ramda": "^0.22.1",
     "request": "^2.74.0",
     "string-template": "^1.0.0",
